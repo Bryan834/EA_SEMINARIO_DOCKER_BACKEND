@@ -42,7 +42,7 @@ app.use(express.json() as express.RequestHandler);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //////////////////////AQUI CONECTAMOS A LA BASE DE DATOS//////////////////////
-mongoose.connect('mongodb://localhost:27017/BBDD')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/BBDD')
     .then(() => {
         console.log('CONEXION EXITOSA A LA BASE DE DATOS DE MONGODB'); 
         createDefaultAdmin(); // Llamamos a la función después de conectar
