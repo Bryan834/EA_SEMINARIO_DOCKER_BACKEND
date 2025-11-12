@@ -1,27 +1,23 @@
-# Imagen base oficial de Node.js
+#  Imagen base oficial de Node.js
 FROM node:20
 
-# Instalar Git (necesario para clonar el repositorio)
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
-
-# Variables del repositorio (recibidas desde docker-compose.yml)
-ARG GIT_REPO
-ARG GIT_BRANCH
-
-# Directorio de trabajo dentro del contenedor
+#  Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Clonar la rama indicada del repositorio
-RUN git clone --branch ${GIT_BRANCH} ${GIT_REPO} .
+#  Copiar los archivos de dependencias
+COPY package*.json ./
 
-# Instalar dependencias
+#  Instalar dependencias
 RUN npm install
 
-# Compilar TypeScript a JavaScript
+#  Copiar el resto del código del backend
+COPY . .
+
+#  Compilar TypeScript a JavaScript
 RUN npm run build
 
-# Exponer el puerto del backend
+#  Exponer el puerto (ajústalo si tu backend usa otro)
 EXPOSE 3000
 
-# Comando para arrancar el servidor compilado
+#  Comando para arrancar el servidor compilado
 CMD ["node", "dist/index.js"]

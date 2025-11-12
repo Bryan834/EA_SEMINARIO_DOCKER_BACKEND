@@ -11,12 +11,7 @@ services:
       - mongo-data:/data/db
 
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        GIT_REPO: https://github.com/Bryan834/EA_SEMINARIO_DOCKER_BACKEND.git
-        GIT_BRANCH: main
+    image: bryan834/ea-backend:latest   
     container_name: ea-backend
     restart: unless-stopped
     ports:
