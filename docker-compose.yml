@@ -4,20 +4,26 @@ services:
   mongo:
     image: mongo:6.0
     container_name: mongodb
-    restart: always
+    restart: unless-stopped
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
 
   backend:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_REPO: https://github.com/Bryan834/EA_SEMINARIO_DOCKER_BACKEND.git
+        GIT_BRANCH: main
     container_name: ea-backend
-    restart: always
+    restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
       - MONGO_URI=mongodb://mongo:27017/BBDD
+      - NODE_ENV=production
     depends_on:
       - mongo
 
