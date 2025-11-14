@@ -31,8 +31,9 @@ async function createDefaultAdmin() {
 }
 
 app.use(cors({
-    origin: 'http://localhost:4200', // Reemplaza con el origen de tu frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    // Permite ambos orígenes
+    origin: ['http://localhost:4200', 'http://localhost'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }))
 
 //////////////////////AQUI APLICAMOS LAS VARIABLES PARA EL MIDDLE WARE CORS//////////////////////
