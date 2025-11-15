@@ -31,11 +31,15 @@ async function createDefaultAdmin() {
 }
 
 app.use(cors({
-    // Permite ambos orígenes
-    origin: ['http://localhost:4200', 'http://localhost'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-}))
-
+    origin: [
+      'http://localhost:4200',   // dev front
+      'http://localhost:8080',   // dev front en docker
+      'https://ea1.upc.edu',     // FRONT en producción (Nota: Quité la '/' final, es más seguro)
+      'https://ea1-api.upc.edu', // Swagger / API en prod
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  }));
 //////////////////////AQUI APLICAMOS LAS VARIABLES PARA EL MIDDLE WARE CORS//////////////////////
 app.use(express.json());
 app.use(cookieParser());
