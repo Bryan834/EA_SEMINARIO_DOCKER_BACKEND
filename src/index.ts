@@ -32,10 +32,10 @@ async function createDefaultAdmin() {
 
 app.use(cors({
     origin: [
-      'http://localhost:4200',   // dev front
-      'http://localhost:8080',   // dev front en docker
-      'https://ea1.upc.edu',     // FRONT en producción (Nota: Quité la '/' final, es más seguro)
-      'https://ea1-api.upc.edu', // Swagger / API en prod
+      'http://localhost:4200',   
+      'http://localhost:8080',   
+      'https://ea1.upc.edu',     
+      'https://ea1-api.upc.edu', 
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
